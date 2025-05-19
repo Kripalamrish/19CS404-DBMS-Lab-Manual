@@ -304,6 +304,7 @@ LEFT JOIN
 
 ![Screenshot 2025-04-29 175421](https://github.com/user-attachments/assets/e1017772-3dc8-45f6-b998-ec59a0a159c1)
 
+![image](https://github.com/user-attachments/assets/65c480f0-b497-48d2-83ff-b8ebd7e9d0f4)
 
 ## RESULT
 Thus, the SQL queries to implement different types of joins have been executed successfully.

@@ -1,130 +1,278 @@
-# Experiment 1: Entity-Relationship (ER) Diagram
+# Experiment 2: DDL Commands
 
-## 🎯 Objective:
-To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+## AIM
+To study and implement DDL commands and different types of constraints.
 
-## 📚 Purpose:
-The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
+## THEORY
 
+### 1. CREATE
+Used to create a new relation (table).
+
+**Syntax:**
+```sql
+CREATE TABLE (
+  field_1 data_type(size),
+  field_2 data_type(size),
+  ...
+);
+```
+### 2. ALTER
+Used to add, modify, drop, or rename fields in an existing relation.
+(a) ADD
+```sql
+ALTER TABLE std ADD (Address CHAR(10));
+```
+(b) MODIFY
+```sql
+ALTER TABLE relation_name MODIFY (field_1 new_data_type(size));
+```
+(c) DROP
+```sql
+ALTER TABLE relation_name DROP COLUMN field_name;
+```
+(d) RENAME
+```sql
+ALTER TABLE relation_name RENAME COLUMN old_field_name TO new_field_name;
+```
+### 3. DROP TABLE
+Used to permanently delete the structure and data of a table.
+```sql
+DROP TABLE relation_name;
+```
+### 4. RENAME
+Used to rename an existing database object.
+```sql
+RENAME TABLE old_relation_name TO new_relation_name;
+```
+### CONSTRAINTS
+Constraints are used to specify rules for the data in a table. If there is any violation between the constraint and the data action, the action is aborted by the constraint. It can be specified when the table is created (using CREATE TABLE) or after it is created (using ALTER TABLE).
+### 1. NOT NULL
+When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) NOT NULL
+);
+```
+### 2. UNIQUE
+Ensures that values in a column are unique.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) UNIQUE
+);
+```
+### 3. CHECK
+Specifies a condition that each row must satisfy.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) CHECK (logical_expression)
+);
+```
+### 4. PRIMARY KEY
+Used to uniquely identify each record in a table.
+Properties:
+Must contain unique values.
+Cannot be null.
+Should contain minimal fields.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) PRIMARY KEY
+);
+```
+### 5. FOREIGN KEY
+Used to reference the primary key of another table.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size),
+  FOREIGN KEY (column_name) REFERENCES other_table(column)
+);
+```
+### 6. DEFAULT
+Used to insert a default value into a column if no value is specified.
+
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  col_name1 data_type,
+  col_name2 data_type,
+  col_name3 data_type DEFAULT 'default_value'
+);
+```
+
+**Question 1**
+--
+![Screenshot 2025-05-01 213324](https://github.com/user-attachments/assets/96559919-d9e5-4220-910c-b3ede4233a0b)
+
+
+```sql
+INSERT INTO Employee(EmployeeID, Name, Department, Salary)
+SELECT EmployeeID, Name, Department,Salary
+FROM Former_employees;
+
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214546](https://github.com/user-attachments/assets/ff022ec9-cd6c-455d-9c0f-272e23f7debb)
+
+
+**Question 2**
+---
+![Screenshot 2025-05-01 213340](https://github.com/user-attachments/assets/614101e5-669f-4c44-8479-04348e67d22c)
+
+```sql
+CREATE TABLE Bonuses  (
+            BonusID INTEGER PRIMARY KEY,
+            EmployeeID INTEGER,
+            BonusAmount REAL CHECK (BonusAmount > 0),
+            BonusDate DATE,
+            Reason TEXT NOT NULL,
+            FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID))
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214603](https://github.com/user-attachments/assets/cb865ade-03e0-41d0-9c46-91d2cc768f6a)
+
+
+**Question 3**
 ---
 
-### 🔹 Scenario 2: Hospital Database
-Design a database for patient management, appointments, medical records, and billing.
+![Screenshot 2025-05-01 213347](https://github.com/user-attachments/assets/efcfca1a-a592-4cc3-99f0-d76816b88c74)
 
-**User Requirements:**
-- Patient details including contact and insurance.
-- Doctors and their departments, contact info, specialization.
-- Appointments with reason, time, patient-doctor link.
-- Medical records with treatments, diagnosis, test results.
-- Billing and payment details for each appointment.
+```sql
+INSERT INTO Employee (EmployeeID,Name,Position,Department,Salary)
+VALUES (1,'Sarah Parker','Manager','HR',60000);
+```
 
+**Output:**
+
+
+
+**Question 4**
 ---
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
+![Screenshot 2025-05-01 213356](https://github.com/user-attachments/assets/ca7bb4b3-6976-4542-9c94-0e38a972f222)
 
-# ER Diagram Submission - Student Name : KRIPAL R
+```sql
+CREATE TABLE Departments (DepartmentID INTEGER, DepartmentName TEXT);
+```
 
-## Scenario Chosen:
-Hospital
+**Output:**
 
-## ER Diagram:
+![Screenshot 2025-05-01 214633](https://github.com/user-attachments/assets/b2c8b7ef-1211-4791-8d76-23e8baa96967)
 
-![image](https://github.com/user-attachments/assets/57832114-fbe9-46d3-ae1c-e544b355a297)
 
-## Entities and Attributes:
-Patient:
-1. PatientID (PK)
-2. FullName
-3. DateOfBirth
-4. Gender
-5. Address
-6. PhoneNumber
-7. Email
-8.InsuranceDetails
+**Question 5**
+---
 
-Doctor:
-1. DoctorID (PK)
-2. FullName
-3. Specialization
-4. PhoneNumber
-5. Email
-6. WorkSchedule
+![Screenshot 2025-05-01 213406](https://github.com/user-attachments/assets/d4ff80a9-cd69-4bf1-91f3-ecfd0a585b16)
 
-Department:
-1. DepartmentID (PK)
-2. DepartmentName
-3. DepartmentHead
+```sql
+INSERT INTO  Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (202, 'Ella King', 'F', 'Chemistry', 87),
+       (203, 'James Bond', 'M', 'Literature', 78);
+```
 
-Appointment:
-1. AppointmentID (PK)
-2. AppointmentDate
-3. AppointmentTime
-4. ReasonForVisit
-5. AdditionalNotes
-6. PatientID (FK)
-7. DoctorID (FK)
+**Output:**
 
-MedicalRecord:
-1. MedicalRecordID (PK)
-2. Diagnosis
-3. PrescribedMedications
-4. Treatments
+![Screenshot 2025-05-01 214646](https://github.com/user-attachments/assets/8ef9d23b-4778-4e58-8559-62cdcbf91773)
 
-TestResults:
-1. OtherMedicalInformation
-2. PatientID (FK)
-3. DoctorID (FK)
 
-Billing:
-1. BillingID (PK)
-2. AppointmentID (FK)
-3. TotalAmount
-4. BillingDate
+**Question 6**
+---
+![Screenshot 2025-05-01 213507](https://github.com/user-attachments/assets/624abf68-191e-4d6a-8726-552d17644082)
 
-Payment:
-1. PaymentID (PK)
-2. BillingID (FK)
-3. PaymentDate
-4. PaymentAmount
-5. PaymentMethod
 
-...
+```sql
+CREATE TABLE Orders (
+        OrderID INTEGER PRIMARY KEY,
+        OrderDate DATE NOT NULL,
+        CustomerID INTEGER,
+        FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID));
+```
 
-## Relationships and Constraints:
-1. Patient (1) --- schedules --- (M) Appointment
-2. Doctor (1) --- conducts --- (M) Appointment
-3. Patient (1) --- has --- (M) MedicalRecord
-4. Doctor (1) --- creates --- (M) MedicalRecord
-5. Department (1) --- employs --- (M) Doctor
-6. Appointment (1) --- generates --- (1) Billing
-7. Billing (1) --- receives --- (1) Payment
-   
-Cardinality and Participation Constraints:
-A patient can have multiple appointments (1:M Relationship), but an appointment is linked to only one patient (M:1 Relationship). A doctor can have multiple appointments (1:M Relationship), but each appointment involves one doctor (M:1 Relationship). A department has multiple doctors (1:M Relationship). Each appointment leads to one billing record (1:1 Relationship). Each billing can receive exactly one payment (1:1 Relationship).
+**Output:**
 
-...
+![Screenshot 2025-05-01 214659](https://github.com/user-attachments/assets/6f797a71-2287-44dc-af1c-093de0b540fe)
 
-## Extension (Billing):
-Billing entity records the amount charged for an appointment.
-Payment entity records the payment made against a bill, including the method(cash, card, insurance, etc.).
-Each billing must be associated with one appointment.
-Each payment must correspond to one billing record.
 
-...
+**Question 7**
+---
 
-## Design Choices:
-Entities: Separate entities for Patient, Doctor, Appointment, MedicalRecord, Billing, and Payment ensure modularity and better data management. Attributes: Chosen based on the essential data needed for hospital operations. Relationships: Clearly define which entity relates to another and how, ensuring integrity and traceability. Billing and Payment: Introduced as separate entities to allow flexibility in
-handling different payment methods and billing adjustments.
+![Screenshot 2025-05-01 213518](https://github.com/user-attachments/assets/19693d8e-60c7-4137-8220-31107ec93e56)
 
-...
+```sql
+ALTER TABLE employee ADD COLUMN department_id INTEGER;
+ALTER TABLE employee ADD COLUMN manager_id INTEGER DEFAULT NULL;
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214709](https://github.com/user-attachments/assets/10b3dfdb-e3a3-463d-a092-fa6d62bf0b29)
+
+
+**Question 8**
+---
+![Screenshot 2025-05-01 213541](https://github.com/user-attachments/assets/b91598fd-b84c-43d3-a802-1c6333de0ac2)
+
+
+```sql
+CREATE TABLE Shipments (
+    ShipmentID INTEGER PRIMARY KEY,
+    ShipmentDate DATE,
+    SupplierID INTEGER,
+    OrderID INTEGER,
+    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID));
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214718](https://github.com/user-attachments/assets/6be5a7e6-f20a-49ea-a0ff-ce1e27dd6b86)
+
+
+**Question 9**
+---
+
+![Screenshot 2025-05-01 213547](https://github.com/user-attachments/assets/91e35b62-68de-4027-a52c-0df416c052e1)
+
+```sql
+ALTER TABLE Student_details
+ADD COLUMN Date_of_birth Date;
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214736](https://github.com/user-attachments/assets/b0d1717c-81b6-47e5-9e14-636d24de13ae)
+
+
+**Question 10**
+---
+![Screenshot 2025-05-01 213556](https://github.com/user-attachments/assets/66e5565f-f763-4c19-a24b-497f413f558f)
+
+
+```sql
+CREATE TABLE orders (
+        ord_id TEXT NOT NULL CHECK (length(ord_id) = 4),
+        item_id TEXT NOT NULL,
+        ord_date DATE NOT NULL,
+        ord_qty INTEGER,
+        cost INTEGER,
+        PRIMARY KEY (item_id,ord_date)
+        );
+```
+
+**Output:**
+
+![Screenshot 2025-05-01 214750](https://github.com/user-attachments/assets/d3bd7f4c-f7b8-45bd-894b-9ef8651c0f88)
+
+![Screenshot 2025-05-01 215155](https://github.com/user-attachments/assets/22835457-2897-453e-a599-d15e3e03eea2)
+
 
 ## RESULT
-A Database to Hospital Management is created Successfully
+Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.

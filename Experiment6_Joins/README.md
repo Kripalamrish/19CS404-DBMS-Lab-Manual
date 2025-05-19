@@ -1,6 +1,6 @@
 # Experiment 6: Joins
-## Name: KISHORE M
-## Reg.no:212224040161
+## Name: KRIPAL R
+## Reg.no:212224040165
 
 ## AIM
 To study and implement different types of joins.

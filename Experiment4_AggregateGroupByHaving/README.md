@@ -1,8 +1,8 @@
 # Experiment 4: Aggregate Functions, Group By and Having Clause
 ```
 Developed by:
-Name : KISHORE M
-Reg No: 212224040161
+Name : KRIPAL R
+Reg No: 212224040165
 ```
 
 ## AIM
